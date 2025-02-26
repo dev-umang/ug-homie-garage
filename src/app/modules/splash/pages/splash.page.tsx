@@ -8,7 +8,7 @@ const SplashPage: FC = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      nav("/garages");
+      nav("/garages", { replace: true });
     }, 1500);
   }, []);
 

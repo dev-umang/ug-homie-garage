@@ -1,28 +1,28 @@
-import { FC, useState } from "react";
-import { Page } from "@components/shared";
-import { FloatButton, SheetDrawer } from "@components/ui";
-import { GarageForm, useGarages } from "..";
+import { FC, useEffect } from "react";
+import { useSearch } from "@common/hooks";
+import { NoData, Page } from "@components/shared";
+import { GarageDrawer, GarageList, useGarages } from "..";
 
 const GaragesPage: FC = () => {
-  const [open, setOpen] = useState(false);
-  const { addGarage, loading } = useGarages();
-  // useEffect(() => {
-  //   getGarages();
-  // }, []);
+  // const [open, setOpen] = useState(false);
+  const { updateQuery } = useSearch();
+  const { getGarages, garages, loading } = useGarages();
+
+  useEffect(() => getGarages(), []);
 
   return (
-    <Page title="Garages">
-      <SheetDrawer
-        title="Add Garage"
-        open={open}
-        onClose={() => setOpen(false)}
-        trigger={<FloatButton onClick={() => setOpen(!open)} type="primary" />}
-      >
-        <GarageForm
-          onSubmit={(g) => addGarage(g, () => setOpen(false))}
-          loading={loading}
+    <Page loading={loading} title="Garages">
+      <GarageList garages={garages} />
+      {garages.length === 0 && (
+        <NoData
+          description={"You do not have any garage at the moment!"}
+          action={{
+            label: "Add New Garage",
+            onClick: () => updateQuery({ q_garagePopup: "true" }),
+          }}
         />
-      </SheetDrawer>
+      )}
+      <GarageDrawer />
     </Page>
   );
 };

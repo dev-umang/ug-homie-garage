@@ -10,7 +10,7 @@ type Props = {
 
 const Page: FC<Props> = (p) => (
   <Spin spinning={p.loading ? true : false}>
-    <div className="p-4">{p.children}</div>
+    <div className="p-4 min-h-[80vh]">{p.children}</div>
   </Spin>
 );
 

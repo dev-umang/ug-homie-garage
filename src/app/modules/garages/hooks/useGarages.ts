@@ -1,50 +1,55 @@
 import { useCallback, useRef, useState } from "react";
-import { Query, getDocs } from "firebase/firestore";
-import { useAtomValue } from "jotai";
-import { notify } from "@common/utils";
+import toast from "react-hot-toast";
+import {
+  CollectionReference,
+  Query,
+  addDoc,
+  getDocs,
+} from "firebase/firestore";
+import { useAtom } from "jotai";
 import { fbRefs } from "@configs/backend";
 import { AtomGarageList, Garage } from "..";
-import { notification } from "antd";
 
 const useGarages = () => {
   const [loading, setLoading] = useState(false);
-  const garages = useAtomValue(AtomGarageList);
+  const [garages, setGarages] = useAtom(AtomGarageList);
   const fetched = useRef({ garages: false, vehicles: false }); // Will prevent multiple fetching on same data.
 
   // Add New garage
   const addGarage = (garage: Garage, callback?: () => void) => {
     setLoading(true);
-    notification.open({message: 'Success'})
-    console.log({ garage });
-    setTimeout(() => {
-      notify.success(`"${garage.name}" is added successfully!`);
-      setLoading(false);
-    //   callback?.();
-    }, 1000);
-
-    // addDoc(fbRefs.garages as CollectionReference, garage)
-    //   .then(() => {
-    //     notify.success(`"${garage.name}" is added successfully!`);
-    //     setLoading(false);
-    //     callback?.();
-    //   })
-    //   .catch((err) => {
-    //     notify.error(err);
-    //     setLoading(false);
-    //   });
+    addDoc(fbRefs.garages as CollectionReference, garage)
+      .then((res) => {
+        toast.success(`"${garage.name}" is added successfully!`);
+        setLoading(false);
+        setGarages((prev) => [...prev, { ...garage, id: res.id }]);
+        callback?.();
+      })
+      .catch((err) => {
+        toast.error(err);
+        setLoading(false);
+      });
   };
 
   // Fetch the list of garages.
   const getGarages = useCallback(() => {
     if (fetched.current.garages) return;
+    setLoading(true);
     console.info(`Fetching garages...`);
     getDocs(fbRefs.garages as Query)
       .then((res) => {
+        const _garages: Garage[] = [];
         for (const doc of res.docs) {
-          console.log(doc.data());
+          const _data: Garage = doc.data() as Garage;
+          _garages.push({ ..._data, id: doc.id });
         }
+        setGarages(_garages);
+        setLoading(false);
       })
-      .catch(notify.error);
+      .catch((err) => {
+        setLoading(false);
+        toast.error(err.message);
+      });
   }, []);
 
   return { loading, garages, getGarages, addGarage };
