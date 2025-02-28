@@ -1,6 +1,8 @@
 import { Avatar, Button, Dropdown } from "antd";
 import { CSSProperties, FC, ReactElement, cloneElement } from "react";
+import { signOut } from "firebase/auth";
 import { Menus } from "@common/constants";
+import { fbAuth } from "@configs/backend";
 import { useTheme } from "@configs/theme";
 
 const ProfilePopover: FC = () => {
@@ -33,10 +35,14 @@ const ProfilePopover: FC = () => {
     boxShadow: "none",
   };
 
+  const onClick = (e: { key: string }) => {
+    if (e.key === "logout") signOut(fbAuth);
+  };
+
   return (
     <Dropdown
       trigger={["click"]}
-      menu={{ items: Menus.accountPopover }}
+      menu={{ items: Menus.accountPopover, onClick }}
       dropdownRender={(menu) => (
         <div style={contentStyle}>
           {ProfileHeader}

@@ -1,13 +1,8 @@
 import { useCallback, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import {
-  CollectionReference,
-  Query,
-  addDoc,
-  getDocs,
-} from "firebase/firestore";
+import { addDoc, getDocs } from "firebase/firestore";
 import { useAtom } from "jotai";
-import { fbRefs } from "@configs/backend";
+import { fbAuth, fbRefs } from "@configs/backend";
 import { AtomGarageList, Garage } from "..";
 
 const useGarage = () => {
@@ -18,7 +13,7 @@ const useGarage = () => {
   // Add New garage
   const addGarage = (garage: Garage, callback?: () => void) => {
     setLoading(true);
-    addDoc(fbRefs.garages as CollectionReference, garage)
+    addDoc(fbRefs.garages(fbAuth.currentUser?.uid), garage)
       .then((res) => {
         toast.success(`"${garage.name}" is added successfully!`);
         setLoading(false);
@@ -33,10 +28,13 @@ const useGarage = () => {
 
   // Fetch the list of garages.
   const getGarages = useCallback(() => {
+    console.log("XXXXX => ", fbAuth.currentUser);
+
     if (fetched.current.garages) return;
     setLoading(true);
     console.info(`Fetching garages...`);
-    getDocs(fbRefs.garages as Query)
+
+    getDocs(fbRefs.garages(fbAuth.currentUser?.uid))
       .then((res) => {
         const _garages: Garage[] = [];
         for (const doc of res.docs) {

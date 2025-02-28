@@ -43,7 +43,8 @@ export const fbNodes = {
 
 export const fbRefs = {
   user: (email: string) => doc(fbStore, fbNodes.users, email),
-  garages: collection(fbStore, fbNodes.garages),
+  garages: (uid?: string) =>
+    collection(fbStore, fbNodes.users, uid ?? "", fbNodes.garages),
   vehicles: (garageKey?: string, limit?: number) => {
     if (garageKey && limit)
       return query(

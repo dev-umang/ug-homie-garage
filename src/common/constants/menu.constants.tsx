@@ -79,7 +79,10 @@ export const Menus: MenuTypes = {
       12,
     ),
     g("Pages", AllPages, 12),
-    m(undefined, <span className="text-red-500">Log Out</span>),
+    {
+      key: "logout",
+      label: <span className="text-red-500">Log Out</span>,
+    },
   ],
   accountPage: [
     { type: "divider" },

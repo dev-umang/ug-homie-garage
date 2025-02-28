@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useLocation } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
@@ -20,17 +20,23 @@ const useAuth = () => {
   const nav = useNav();
   const path = useLocation().pathname; // Current Location.
   const [authUser, setAuthUser] = useAtom(AtomAuthUser);
+  const [loading, setLoading] = useState(false);
 
   // Sign in with google
   const googleSignIn = useCallback(() => {
     const gProvider = new GoogleAuthProvider();
-
+    setLoading(true);
     signInWithPopup(fbAuth, gProvider)
       .then(({ user }) => {
-        if (user.email?.endsWith("protocolzone.com"))
-          toast.success(`Welcome ${user?.displayName ?? user.email}`);
+        toast.success(`Welcome ${user?.displayName ?? user.email}`);
+        nav("/garages");
+        setLoading(false);
       })
-      .catch((err: FirebaseError) => console.error(err.message));
+      .catch((err: FirebaseError) => {
+        setLoading(false);
+        toast.error(err.message);
+        console.error(err.message);
+      });
   }, []);
 
   // Firebase listener to identify if the user is logged in, if yes callback to parent, if protected route go to login.
@@ -38,6 +44,7 @@ const useAuth = () => {
     (callback?: (user: User) => void, onError?: () => void) => {
       if (authSub.current) return;
       console.warn("CHECK USER CALLED ");
+
       // Assignment of firebase listener instance to current reference
       authSub.current = onAuthStateChanged(
         fbAuth,
@@ -88,7 +95,7 @@ const useAuth = () => {
   // Destroy firebase listener on destroy of the hook.
   useEffect(() => () => authSub.current?.(), []);
 
-  return { checkUser, googleSignIn, authUser, setAuthUser, getUser };
+  return { checkUser, googleSignIn, authUser, setAuthUser, getUser, loading };
 };
 
 export default useAuth;
