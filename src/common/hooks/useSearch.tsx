@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 
-type SearchFields = "q_garagePopup" | "demo";
+export type SearchFields = "q_garagePopup" | "q_garageKey";
 
 const useSearch = () => {
   const [params, setParams] = useSearchParams();

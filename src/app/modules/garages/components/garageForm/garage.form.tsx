@@ -3,7 +3,7 @@ import { FC } from "react";
 import { useAtomValue } from "jotai";
 import { useSearch } from "@common/hooks";
 import { generate } from "@common/utils";
-import { AtomGarageList, type Garage, useGarages } from "@modules/garages";
+import { AtomGarageList, type Garage, useGarage } from "@modules/garages";
 import { CheckOutlined } from "@ant-design/icons";
 
 const { Item, useForm } = Form;
@@ -15,7 +15,7 @@ const GarageForm: FC<Props> = () => {
   const [form] = useForm();
   const { updateQuery } = useSearch();
   const garages = useAtomValue(AtomGarageList);
-  const { addGarage, loading } = useGarages();
+  const { addGarage, loading } = useGarage();
 
   const onFinish = (values: Required<Garage>) =>
     addGarage({ ...values, key: generate.key(values.name, garages) }, () =>

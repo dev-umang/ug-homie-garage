@@ -1,4 +1,5 @@
 import AccountLayout from "./account/account.layout";
-import MainLayout from "./main/main.layout";
+import NestedLayout from "./nested/nested.layout";
+import TabsLayout from "./tabs/tabs.layout";
 
-export { MainLayout, AccountLayout };
+export { TabsLayout, AccountLayout, NestedLayout };

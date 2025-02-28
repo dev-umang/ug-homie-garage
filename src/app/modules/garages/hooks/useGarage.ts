@@ -10,7 +10,7 @@ import { useAtom } from "jotai";
 import { fbRefs } from "@configs/backend";
 import { AtomGarageList, Garage } from "..";
 
-const useGarages = () => {
+const useGarage = () => {
   const [loading, setLoading] = useState(false);
   const [garages, setGarages] = useAtom(AtomGarageList);
   const fetched = useRef({ garages: false, vehicles: false }); // Will prevent multiple fetching on same data.
@@ -55,4 +55,4 @@ const useGarages = () => {
   return { loading, garages, getGarages, addGarage };
 };
 
-export default useGarages;
+export default useGarage;

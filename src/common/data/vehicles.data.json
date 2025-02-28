@@ -1,0 +1,14 @@
+{
+  "brands": {
+    "royalEnfield": {
+      "id": "royalEnfield",
+      "name": "Royal Enfield",
+      "logo": "https://logos-download.com/wp-content/uploads/2019/06/Royal_Enfield_Logo.png"
+    },
+    "honda": {
+      "id": "honda",
+      "name": "Honda",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrfWfenrbxYGSZSMrH_gcGSzVtklWaOIlFeA&s"
+    }
+  }
+}

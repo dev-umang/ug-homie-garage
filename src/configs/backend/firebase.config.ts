@@ -1,13 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {
-  CollectionReference,
-  DocumentData,
-  DocumentReference,
-  Query,
   collection,
   getFirestore,
+  limitToLast,
+  query,
+  where,
 } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { env } from "@common/utils";
@@ -34,15 +34,35 @@ export const fbNodes = {
   vehicles: n("VEHICLES"),
 };
 
-type Refs =
-  | Query<DocumentData, DocumentData>
-  | DocumentReference
-  | CollectionReference;
+// type Refs =
+//   | ReturnType<typeof query<DocumentData, DocumentData>>
+//   | DocumentReference
+//   | CollectionReference;
 
-export const fbRefs: {
-  [k in keyof typeof fbNodes]: Refs | (([...args]) => Refs);
-} = {
+export const fbRefs = {
   garages: collection(fbStore, fbNodes.garages),
-  vehicles: ([vehicleId]) =>
-    collection(fbStore, fbNodes.garages, vehicleId, fbNodes.vehicles),
+  vehicles: (garageKey?: string, limit?: number) => {
+    if (garageKey && limit)
+      return query(
+        collection(fbStore, fbNodes.vehicles),
+        where("garageKey", "==", garageKey),
+        limitToLast(5),
+      );
+    else if (garageKey)
+      return query(
+        collection(fbStore, fbNodes.vehicles),
+        where("garageKey", "==", garageKey),
+      );
+    return query(collection(fbStore, fbNodes.vehicles));
+  },
+  // limit
+  //   ? query(
+  //       collection(fbStore, fbNodes.vehicles),
+  //       where("garageKey", "==", garageKey),
+  //       limitToLast(5),
+  //     )
+  //   : query(
+  //       collection(fbStore, fbNodes.vehicles),
+  //       where("garageKey", "==", garageKey),
+  //     ),
 };

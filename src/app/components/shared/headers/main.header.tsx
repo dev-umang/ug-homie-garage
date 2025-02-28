@@ -22,8 +22,6 @@ const MainHeader: FC = () => {
     >
       <div className="flex items-center justify-between px-4 mx-auto">
         <h2 className="text-xl font-black flex gap-2 items-center">
-          {" "}
-          {/* <Home className="stroke-2" /> LOGO */}
           {title()}
         </h2>
         <Space>

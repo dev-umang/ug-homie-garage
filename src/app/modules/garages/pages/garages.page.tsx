@@ -1,12 +1,12 @@
 import { FC, useEffect } from "react";
 import { useSearch } from "@common/hooks";
 import { NoData, Page } from "@components/shared";
-import { GarageDrawer, GarageList, useGarages } from "..";
+import { GarageDrawer, GarageList, useGarage } from "..";
 
 const GaragesPage: FC = () => {
   // const [open, setOpen] = useState(false);
   const { updateQuery } = useSearch();
-  const { getGarages, garages, loading } = useGarages();
+  const { getGarages, garages, loading } = useGarage();
 
   useEffect(() => getGarages(), []);
 

@@ -6,7 +6,7 @@ import { BottomNav, MainHeader } from "@components/shared";
 
 const { Content } = Layout;
 
-const MainLayout: FC = () => (
+const TabsLayout: FC = () => (
   <Layout className="h-screen overflow-auto">
     <MainHeader />
     <Layout>
@@ -21,4 +21,4 @@ const MainLayout: FC = () => (
   </Layout>
 );
 
-export default MainLayout;
+export default TabsLayout;

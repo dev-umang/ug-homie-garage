@@ -1,17 +1,19 @@
 import GarageDrawer from "./components/garageDrawer/garage.drawer";
 import GarageForm from "./components/garageForm/garage.form";
 import GarageList from "./components/garageList/garage.list";
-import useGarages from "./hooks/useGarages";
+import GarageVehicleList from "./components/garageVehicles/garageVehicle.list";
+import useGarage from "./hooks/useGarage";
 import GaragesPage from "./pages/garages.page";
-import { AtomGarageList } from "./store/garages.store";
-import { Garage } from "./types/garages.type";
+import { AtomGarageList } from "./store/garage.store";
+import { Garage } from "./types/garage.types";
 
 export {
   GaragesPage,
   GarageForm,
   GarageDrawer,
-  useGarages,
+  useGarage,
   type Garage,
   AtomGarageList,
   GarageList,
+  GarageVehicleList,
 };
