@@ -1,8 +1,15 @@
 import { FC } from "react";
 import { RouteObject } from "react-router-dom";
-import { AccountLayout, NestedLayout, TabsLayout } from "@app/layouts";
+import {
+  AccountLayout,
+  AuthLayout,
+  GlobalLayout,
+  NestedLayout,
+  TabsLayout,
+} from "@app/layouts";
 import { SearchFields } from "@common/hooks/useSearch";
 import { _404Page } from "@modules/404";
+import { LoginPage } from "@modules/auth";
 import { GaragesPage } from "@modules/garages";
 import { ProfilePage } from "@modules/profile";
 import { SettingsPage } from "@modules/settings";
@@ -12,6 +19,7 @@ import { AddVehiclePage, VehiclesPage } from "@modules/vehicles";
 // List of URL paths that our application supports.
 export const Paths = [
   "/",
+  "/auth/login",
   "/garages",
   "/account/profile",
   "/account/settings",
@@ -52,17 +60,21 @@ export const AppRoutes: RouteObject[] = [
   // r(GlobalLayout, [
   r(_404Page, "*"),
   r(SplashPage, "/"),
-  r(TabsLayout, [
-    r(GaragesPage, "/garages"),
-    r(AccountLayout, [
-      r(ProfilePage, "/account/profile"),
-      r(SettingsPage, "/account/settings"),
+  r(AuthLayout, [r(LoginPage, "/auth/login")]),
+  r(GlobalLayout, [
+    r(TabsLayout, [
+      r(GaragesPage, "/garages"),
+      r(AccountLayout, [
+        r(ProfilePage, "/account/profile"),
+        r(SettingsPage, "/account/settings"),
+      ]),
+    ]),
+    r(NestedLayout, [
+      r(VehiclesPage, "/vehicles"),
+      r(AddVehiclePage, "/vehicles/add"),
     ]),
   ]),
-  r(NestedLayout, [
-    r(VehiclesPage, "/vehicles"),
-    r(AddVehiclePage, "/vehicles/add"),
-  ]),
+
   // r(MainLayout) // Selected Vehicle Layout
   // ]),
 ];

@@ -4,6 +4,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {
   collection,
+  doc,
   getFirestore,
   limitToLast,
   query,
@@ -32,6 +33,7 @@ const n = (node: string) => `${env.get("VITE_NODE_PREFIX") ?? ""}${node}`;
 export const fbNodes = {
   garages: n("GARAGES"),
   vehicles: n("VEHICLES"),
+  users: n("USERS"),
 };
 
 // type Refs =
@@ -40,6 +42,7 @@ export const fbNodes = {
 //   | CollectionReference;
 
 export const fbRefs = {
+  user: (email: string) => doc(fbStore, fbNodes.users, email),
   garages: collection(fbStore, fbNodes.garages),
   vehicles: (garageKey?: string, limit?: number) => {
     if (garageKey && limit)
