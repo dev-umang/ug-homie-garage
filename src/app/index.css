@@ -1,0 +1,13 @@
+@layer theme, base, components ,antd, utilities;
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-muted: #888888ff;
+  --spacing-layout: 90rem;
+  --spacing-default: 0.75rem;
+}
+
+@theme dark {
+  --color-muted: #8e8e8eff;
+}
