@@ -26,7 +26,9 @@ const GetStartedWrapper: FC<Props> = ({ children }) => {
       exit="exit"
       className="flex flex-col items-center justify-center flex-1 w-full"
     >
-      <div className="max-w-lg text-white">{children}</div>
+      <div className="max-w-lg text-white flex flex-col gap-8 p-8">
+        {children}
+      </div>
     </motion.div>
   );
 };

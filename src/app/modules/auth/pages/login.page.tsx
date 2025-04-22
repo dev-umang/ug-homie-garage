@@ -1,5 +1,4 @@
 import { Button, Divider, Form, Input, Space } from "antd";
-import "lucide-react";
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { useNav } from "@common/hooks";
