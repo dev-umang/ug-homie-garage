@@ -1,5 +1,6 @@
 import AuthLayout from "./auth.layout";
 import GetStartedLayout from "./getStarted.layout";
+import GlobalLayout from "./global.layout";
 import MainLayout from "./main.layout";
 
-export { AuthLayout, MainLayout, GetStartedLayout };
+export { AuthLayout, MainLayout, GetStartedLayout, GlobalLayout };

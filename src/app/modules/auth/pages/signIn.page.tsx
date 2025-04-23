@@ -3,12 +3,14 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import { useNav } from "@common/hooks";
 import { AuthCard } from "@components/shared";
+import { useSignIn } from "..";
 
 const { Item, useForm } = Form;
 
-const LoginPage: FC = () => {
+const SignInPage: FC = () => {
   const [form] = useForm();
   const nav = useNav();
+  const { signIn, loading } = useSignIn();
 
   const handleFinish = (values: { email: string; password: string }) => {
     console.info("Form values:", values);
@@ -28,7 +30,8 @@ const LoginPage: FC = () => {
           variant="outlined"
           size="large"
           className="inline-flex items-center justify-center mt-6"
-          onClick={() => nav("/get-started/welcome")}
+          onClick={signIn.google}
+          loading={loading}
           icon={
             <div className="bg-white rounded-full p-0.5">
               <svg
@@ -94,4 +97,4 @@ const LoginPage: FC = () => {
   );
 };
 
-export default LoginPage;
+export default SignInPage;

@@ -1,7 +1,10 @@
 import globals from "globals";
 import tslint from "typescript-eslint";
 import react from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
 import pluginJs from "@eslint/js";
+
+// Import the hooks plugin
 
 export default [
   {
@@ -20,6 +23,7 @@ export default [
     },
     plugins: {
       react,
+      "react-hooks": reactHooks, // Add the react-hooks plugin
     },
     languageOptions: {
       parserOptions: {
@@ -78,6 +82,8 @@ export default [
       "no-useless-concat": "error",
       "require-await": "error",
       yoda: "error",
+      "react-hooks/rules-of-hooks": "error", // Checks rules of using hooks
+      "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
     },
   },
 ];

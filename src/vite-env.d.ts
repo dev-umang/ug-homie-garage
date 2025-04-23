@@ -1,7 +1,13 @@
-/// <reference types="vite/client" />
 /// <reference types="vite-plugin-pwa/react" />
+/// <reference types="vite/client" />
 
-export interface ImportMetaEnv {
+interface ViteTypeOptions {
+  // By adding this line, you can make the type of ImportMetaEnv strict
+  // to disallow unknown keys.
+  strictImportMetaEnv: unknown;
+}
+
+interface ImportMetaEnv {
   readonly VITE_PORT: string;
   readonly VITE_apiKey: string;
   readonly VITE_authDomain: string;

@@ -46,7 +46,11 @@ const InitAddGaragePage: FC = () => {
             required
             style={{ marginBottom: 0 }}
           >
-            <Input size="large" placeholder="Enter your garage name" />
+            <Input
+              className="bg-white text-black border-slate-500"
+              size="large"
+              placeholder="Enter your garage name"
+            />
           </Item>
           <Item name={"garageId"}>
             <span className="text-sm font-semibold text-white/80">

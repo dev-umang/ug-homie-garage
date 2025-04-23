@@ -1,8 +1,13 @@
 import { FC } from "react";
 import { RouteObject } from "react-router-dom";
-import { AuthLayout, GetStartedLayout, MainLayout } from "@app/layouts";
+import {
+  AuthLayout,
+  GetStartedLayout,
+  GlobalLayout,
+  MainLayout,
+} from "@app/layouts";
 import { _404Page } from "@modules/404";
-import { ForgotPasswordPage, LoginPage } from "@modules/auth";
+import { ForgotPasswordPage, SignInPage } from "@modules/auth";
 import { DashboardPage } from "@modules/dashboard";
 import { InitAddGaragePage, WelcomePage } from "@modules/getStarted";
 import { SplashPage } from "@modules/splash";
@@ -37,12 +42,17 @@ export const AppRoutes: RouteObject[] = [
   r(_404Page, "*"),
   r(SplashPage, "/"),
   r(AuthLayout, [
-    r(LoginPage, "/auth/login"),
+    r(SignInPage, "/auth/login"),
     r(ForgotPasswordPage, "/auth/forgot-password"),
   ]),
-  r(GetStartedLayout, [
-    r(WelcomePage, "/get-started/welcome"),
-    r(InitAddGaragePage, "/get-started/add-garage"),
+  r(GlobalLayout, [
+    r(GetStartedLayout, [
+      r(WelcomePage, "/get-started/welcome"),
+      r(InitAddGaragePage, "/get-started/add-garage"),
+    ]),
+    r(MainLayout, [
+      r(DashboardPage, "/dashboard"),
+      r(WelcomePage, "/dashboard"),
+    ]),
   ]),
-  r(MainLayout, [r(DashboardPage, "/dashboard"), r(WelcomePage, "/dashboard")]),
 ];
