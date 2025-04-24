@@ -9,7 +9,7 @@ const AuthLayout: FC = () => {
   const { checkAuthExists } = useAuth();
 
   useEffect(() => {
-    const unsubscribe = checkAuthExists();
+    const unsubscribe = checkAuthExists("/dashboard");
     return () => unsubscribe?.();
   }, [checkAuthExists]);
 

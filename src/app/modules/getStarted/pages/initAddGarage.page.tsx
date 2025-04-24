@@ -2,28 +2,27 @@ import { Button, Flex, Form, Input } from "antd";
 import { FC } from "react";
 import { ImArrowRight } from "react-icons/im";
 import { Link } from "react-router-dom";
+import { GarageFormValues, useGarages } from "@modules/garages";
 import { GetStartedWrapper } from "..";
 
 const { Item, useForm, useWatch } = Form;
 
-type GarageFormValues = {
-  garageName: string;
-  garageId: string;
-};
-
 const InitAddGaragePage: FC = () => {
   const [form] = useForm<GarageFormValues>();
-  const garageId = useWatch("garageId", form);
+  const garageKey = useWatch("key", form);
+  const { onInitAddGarage, loading } = useGarages();
 
   const onFinish = (values: GarageFormValues) => {
     console.info("Received values of form: ", values);
+    onInitAddGarage(values);
   };
 
   const onValuesChange = (changedValues: GarageFormValues) => {
-    form.setFieldValue(
-      "garageId",
-      changedValues.garageName.toLowerCase().replace(/\s+/g, "-"),
-    );
+    if (changedValues.name !== undefined)
+      form.setFieldValue(
+        "key",
+        changedValues.name.toLowerCase().replace(/\s+/g, "-"),
+      );
   };
 
   return (
@@ -42,7 +41,7 @@ const InitAddGaragePage: FC = () => {
         >
           <Item
             label={<label className="text-white">Garage Name</label>}
-            name="garageName"
+            name="name"
             required
             style={{ marginBottom: 0 }}
           >
@@ -52,9 +51,9 @@ const InitAddGaragePage: FC = () => {
               placeholder="Enter your garage name"
             />
           </Item>
-          <Item name={"garageId"}>
+          <Item name={"key"}>
             <span className="text-sm font-semibold text-white/80">
-              {garageId}
+              {garageKey}
             </span>
           </Item>
           <Item>
@@ -69,6 +68,7 @@ const InitAddGaragePage: FC = () => {
                 htmlType="submit"
                 icon={<ImArrowRight />}
                 iconPosition="end"
+                loading={loading}
               >
                 Create
               </Button>

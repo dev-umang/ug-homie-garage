@@ -1,4 +1,5 @@
 import useAuth from "./hooks/useAuth";
+import useCreateUser from "./hooks/useCreateUser";
 import useSignIn from "./hooks/useSignIn";
 import ForgotPasswordPage from "./pages/forgotPassword.page";
 import SignInPage from "./pages/signIn.page";
@@ -12,4 +13,5 @@ export {
   AtomAuthUser,
   useAuth,
   useSignIn,
+  useCreateUser,
 };

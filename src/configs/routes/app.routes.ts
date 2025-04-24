@@ -40,12 +40,12 @@ const r = (
 // Application router configuration. Path to component mapping
 export const AppRoutes: RouteObject[] = [
   r(_404Page, "*"),
-  r(SplashPage, "/"),
   r(AuthLayout, [
     r(SignInPage, "/auth/login"),
     r(ForgotPasswordPage, "/auth/forgot-password"),
   ]),
   r(GlobalLayout, [
+    r(SplashPage, "/"),
     r(GetStartedLayout, [
       r(WelcomePage, "/get-started/welcome"),
       r(InitAddGaragePage, "/get-started/add-garage"),
