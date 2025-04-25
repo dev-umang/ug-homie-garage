@@ -5,6 +5,7 @@ export type VehicleType = GenericDataType & {
   manufacturedYear: string;
   brand: GenericDataType;
   brandLogo?: string;
+  garageId: string;
   // Owner Info
   // RC Info
   // Insurance Info
