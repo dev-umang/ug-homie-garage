@@ -9,8 +9,10 @@ import {
 import { _404Page } from "@modules/404";
 import { ForgotPasswordPage, SignInPage } from "@modules/auth";
 import { DashboardPage } from "@modules/dashboard";
+import { GaragesPage } from "@modules/garages";
 import { InitAddGaragePage, WelcomePage } from "@modules/getStarted";
 import { SplashPage } from "@modules/splash";
+import { AddVehiclePage, VehiclesPage } from "@modules/vehicles";
 
 // List of URL paths that our application supports.
 export const Paths = [
@@ -18,6 +20,9 @@ export const Paths = [
   "/auth/login",
   "/auth/forgot-password",
   "/dashboard",
+  "/garages",
+  "/vehicles",
+  "/vehicles/add",
   "/get-started/welcome",
   "/get-started/add-garage",
 ] as const;
@@ -52,7 +57,9 @@ export const AppRoutes: RouteObject[] = [
     ]),
     r(MainLayout, [
       r(DashboardPage, "/dashboard"),
-      r(WelcomePage, "/dashboard"),
+      r(GaragesPage, "/garages"),
+      r(VehiclesPage, "/vehicles"),
+      r(AddVehiclePage, "/vehicles/add"),
     ]),
   ]),
 ];

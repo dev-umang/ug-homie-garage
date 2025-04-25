@@ -1,14 +1,23 @@
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { serverTimestamp, setDoc } from "firebase/firestore";
+import {
+  Unsubscribe,
+  onSnapshot,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
+import { useAtom } from "jotai";
 import { Errors } from "@common/constants";
+import { generator } from "@common/utils";
 import { fbAuth, fbRefs } from "@configs/backend";
 import { useCreateUser } from "@modules/auth";
-import { GarageFormValues, GarageType } from "..";
+import { AtomGarages, GarageFormValues, GarageType } from "..";
 
 const useGarages = () => {
   const [loading, setLoading] = useState(false);
   const { createUser } = useCreateUser();
+  const garagesRef = useRef<Unsubscribe>(null);
+  const [garages, setGarages] = useAtom(AtomGarages);
 
   const addNewGarage = (
     payload: GarageFormValues,
@@ -62,7 +71,19 @@ const useGarages = () => {
     }, 1000);
   };
 
-  return { loading, addNewGarage, onInitAddGarage };
+  const getGarages = useCallback(() => {
+    const { uid } = fbAuth.currentUser ?? {};
+    if (uid) {
+      garagesRef.current = onSnapshot(
+        fbRefs.garage.getAll(uid),
+        (res) => setGarages(generator.firestore<GarageType>(res)),
+        console.error,
+      );
+    }
+    return garagesRef.current;
+  }, [setGarages]);
+
+  return { loading, addNewGarage, onInitAddGarage, getGarages, garages };
 };
 
 export default useGarages;

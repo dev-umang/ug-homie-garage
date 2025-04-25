@@ -34,7 +34,7 @@ const useAuth = () => {
               window.location.pathname === "/" ||
               window.location.pathname.startsWith("/get-started")
             )
-              nav("/dashboard");
+              nav("/garages");
             const _data: AuthUser = res.data() as AuthUser;
             setAuthUser(_data);
           } else {

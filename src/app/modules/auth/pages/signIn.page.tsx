@@ -14,7 +14,7 @@ const SignInPage: FC = () => {
 
   const handleFinish = (values: { email: string; password: string }) => {
     console.info("Form values:", values);
-    nav("/dashboard");
+    nav("/garages");
   };
 
   return (
