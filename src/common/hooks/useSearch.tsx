@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 
 // Search fields are used for key of URLSearchParams.
-export type SearchFields = "addVehicle";
+export type SearchFields = "addGarage" | "addVehicle";
 
 export type SearchQueryObject = {
   [k in SearchFields]?: string | boolean | number;

@@ -1,3 +1,3 @@
-import { GenericDataType } from "./common.types";
+import { CommonType, GenericDataType } from "./common.types";
 
-export type { GenericDataType };
+export type { GenericDataType, CommonType };

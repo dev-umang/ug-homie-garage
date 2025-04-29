@@ -12,7 +12,7 @@ import { DashboardPage } from "@modules/dashboard";
 import { GaragesPage } from "@modules/garages";
 import { InitAddGaragePage, WelcomePage } from "@modules/getStarted";
 import { SplashPage } from "@modules/splash";
-import { AddVehiclePage, VehiclesPage } from "@modules/vehicles";
+import { VehiclesPage } from "@modules/vehicles";
 
 // List of URL paths that our application supports.
 export const Paths = [
@@ -59,7 +59,6 @@ export const AppRoutes: RouteObject[] = [
       r(DashboardPage, "/dashboard"),
       r(GaragesPage, "/garages"),
       r(VehiclesPage, "/vehicles"),
-      r(AddVehiclePage, "/vehicles/add"),
     ]),
   ]),
 ];

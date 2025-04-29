@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { FieldValue } from "firebase/firestore";
 
 export type GenericDataType = {
@@ -8,3 +9,8 @@ export type GenericDataType = {
   updatedBy?: string; // Store email of the user who updates the data
   createdBy?: string; // Store email of the user who creates the data
 };
+
+export type CommonType = Partial<{
+  label: ReactNode;
+  value: string;
+}>;

@@ -1,3 +1,4 @@
+import AddGarageForm from "./components/forms/addGarage.form";
 import GarageContainer from "./components/garageContainer/garage.container";
 import useGarages from "./hooks/useGarages";
 import GaragesPage from "./pages/garages.page";
@@ -11,4 +12,5 @@ export {
   AtomGarages,
   GaragesPage,
   GarageContainer,
+  AddGarageForm,
 };

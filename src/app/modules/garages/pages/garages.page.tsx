@@ -2,7 +2,8 @@ import { Button } from "antd";
 import { FC, useEffect } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AppPage } from "@components/shared";
-import { GarageContainer, useGarages } from "@modules/garages";
+import { SheetModal } from "@components/ui";
+import { AddGarageForm, GarageContainer, useGarages } from "@modules/garages";
 
 const GaragesPage: FC = () => {
   const { getGarages, garages } = useGarages();
@@ -16,9 +17,16 @@ const GaragesPage: FC = () => {
     <AppPage
       title="Garages"
       extra={
-        <Button icon={<AiOutlinePlus />} type="text">
-          Add Garage
-        </Button>
+        <SheetModal
+          trigger={
+            <Button icon={<AiOutlinePlus />} type="text">
+              Add Garage
+            </Button>
+          }
+          openKey={"addGarage"}
+        >
+          <AddGarageForm />
+        </SheetModal>
       }
     >
       {garages?.map((g) => <GarageContainer garage={g} key={g.id} />)}

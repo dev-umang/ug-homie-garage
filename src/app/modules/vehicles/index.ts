@@ -1,6 +1,5 @@
 import AddVehicleForm from "./components/forms/addVehicle.form";
 import useVehicles from "./hooks/useVehicles";
-import AddVehiclePage from "./pages/addVehicle.page";
 import VehiclesPage from "./pages/vehicles.page";
 import { AtomVehicles } from "./store/vehicles.store";
 import { VehicleType } from "./types/vehicle.types";
@@ -10,6 +9,5 @@ export {
   VehiclesPage,
   AtomVehicles,
   useVehicles,
-  AddVehiclePage,
   AddVehicleForm,
 };

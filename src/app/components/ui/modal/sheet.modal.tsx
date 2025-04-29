@@ -7,6 +7,7 @@ type Props = {
   openKey: SearchFields;
   children?: ReactNode;
   title?: string;
+  subtitle?: string;
   onDestroy?: () => void;
   onClose?: () => void;
   defaultModal?: boolean;
@@ -62,7 +63,10 @@ const SheetModal: FC<Props> = (p) => {
         </div>
 
         <div>
-          <div className="text-lg font-bold mb-4">{p.title}</div>
+          <div className="mb-4 font-bold">
+            <div className="text-lg">{p.title}</div>
+            <div className="text-xs text-muted">{p.subtitle}</div>
+          </div>
           {p.children}
         </div>
       </div>

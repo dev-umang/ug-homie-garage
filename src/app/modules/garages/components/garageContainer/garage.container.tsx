@@ -1,4 +1,4 @@
-import { Button, Card } from "antd";
+import { Button, Card, Spin } from "antd";
 import { FC, useEffect } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { MdGarage } from "react-icons/md";
@@ -11,7 +11,8 @@ type Props = {
 };
 
 const GarageContainer: FC<Props> = ({ garage }) => {
-  const { getVehiclesByGarage, garageVehicles } = useVehicles();
+  const { getVehiclesByGarage, garageVehicles, addNewVehicle, loading } =
+    useVehicles();
 
   useEffect(() => {
     if (garage.id) getVehiclesByGarage(garage.id);
@@ -30,8 +31,15 @@ const GarageContainer: FC<Props> = ({ garage }) => {
             </Button>
           }
           openKey={"addVehicle"}
+          title="Add New Vehicle"
+          subtitle="Enter your vehicle information in the given form"
         >
-          <AddVehicleForm vehicle={{ garageId: garage.id }} />
+          <Spin spinning={loading}>
+            <AddVehicleForm
+              vehicle={{ garageId: garage.id }}
+              onSubmit={addNewVehicle}
+            />
+          </Spin>
         </SheetModal>
       </div>
       <Card>

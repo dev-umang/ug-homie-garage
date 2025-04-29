@@ -1,3 +1,4 @@
 import { Errors } from "./errors.constants";
+import { Vehicle } from "./vehicle.constants";
 
-export { Errors };
+export { Errors, Vehicle };

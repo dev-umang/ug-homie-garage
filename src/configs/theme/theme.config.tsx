@@ -28,6 +28,13 @@ const ThemeConfig: FC<Props> = ({ children }) => {
             // colorBgElevated: c.container,
           },
           components: {
+            Form: {
+              itemMarginBottom: 8,
+              verticalLabelMargin: 0,
+              verticalLabelPadding: `0 0.5rem`,
+              labelFontSize: 13,
+              labelColor: c.bodySecondaryText,
+            },
             Menu: {
               darkItemBg: "transparent",
               darkItemColor: c.bodySecondaryText,
