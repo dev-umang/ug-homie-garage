@@ -6,8 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit",
+    "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
+    "prettify": "prettier --write src/**/*.{ts,tsx}",
+    "lint": "pnpm prettify && pnpm lint:fix && pnpm type-check && eslint src/**/*.{ts,tsx}",
+    "prepare": "husky"
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.23.0",

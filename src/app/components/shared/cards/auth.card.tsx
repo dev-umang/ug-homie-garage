@@ -5,6 +5,8 @@ type Props = {
   children: ReactNode;
 };
 
-const AuthCard: FC<Props> = ({ children }) => <Card size="small">{children}</Card>;
+const AuthCard: FC<Props> = ({ children }) => (
+  <Card size="small">{children}</Card>
+);
 
 export default AuthCard;

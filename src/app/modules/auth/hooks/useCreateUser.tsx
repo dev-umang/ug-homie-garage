@@ -19,17 +19,10 @@ const useCreateUser = () => {
 
   const createUser = (user: AuthUser) =>
     new Promise<AuthUser | null>((resolve) => {
-      console.log(`1. Starting process to create user ${user.email}`);
-      console.log(`2. Checking if user exists ${user.email}`);
       checkUserExists(user.uid).then((res) => {
         if (res) {
-          console.log(`3. User already exists with email ${user.email}`);
           resolve(res);
         } else {
-          console.log(
-            `3. User Does not exists with email ${user.email}! Creating one!`,
-          );
-          
           const _user: AuthUser = {
             displayName: user.displayName,
             email: user.email,

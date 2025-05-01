@@ -24,6 +24,7 @@ const AddVehicleForm: FC<Props> = (p) => {
       createdAt: serverTimestamp(),
       createdBy: fbAuth.currentUser?.email ?? "UNKNOWN_USER",
       ownerCount: 0,
+      garageId: p.vehicle?.garageId ?? "UNKNOWN_GARAGE",
     };
     p.onSubmit?.(vehicle);
   };

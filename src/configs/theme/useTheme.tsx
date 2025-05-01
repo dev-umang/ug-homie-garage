@@ -10,7 +10,10 @@ const useTheme = () => {
   const [darkMode, setDarkMode] = useAtom(AtomDarkMode);
   const { token } = useToken();
   // Switch between dark and light mode.
-  const toggleDarkMode = useCallback(() => setDarkMode((d) => !d), []);
+  const toggleDarkMode = useCallback(
+    () => setDarkMode((d) => !d),
+    [setDarkMode],
+  );
 
   const color = useMemo(
     () => Colors[darkMode ? "dark" : "light"] ?? {},
