@@ -73,6 +73,7 @@ const useGarages = () => {
 
   const getGarages = useCallback(() => {
     const { uid } = fbAuth.currentUser ?? {};
+
     if (uid) {
       garagesRef.current = onSnapshot(
         fbRefs.garage.getAll(uid),
